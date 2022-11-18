@@ -13,6 +13,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 function Copyright(props) {
   return (
     <Typography
@@ -35,26 +41,54 @@ const theme = createTheme();
 
 export const SignIn = () => {
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  const [cookies, setCookie, removeCookie] = useCookies(["currentUser"]);
+  const [allUsers, setAllusers] = useCookies(["allUsers"]);
 
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
-    let Users = JSON.parse(localStorage.getItem("Users"));
-    // console.log(Users);
-    let TrueUser = Users.filter((user) => {
-      return (
-        user.email == data.get("email") && user.password == data.get("password")
-      );
-    });
-    console.log(TrueUser.length > 0);
-    if (TrueUser.length > 0) {
+  const handelSubmit = () => {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    const currentUser = { email: email, password: password };
+    if (checkUser()) {
+      setCookie("currentUser", currentUser, { path: "/" });
       navigate("/Home");
-    } else navigate("/SignIn");
+    } else {
+      MySwal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid Email or password",
+        denyButtonColor: "#8E05C2",
+      });
+    }
+
+    function checkUser() {
+      console.log(allUsers);
+      let user = allUsers.AllUsers.filter(
+        (user) => user.email == currentUser.email
+      );
+      if (user.length > 0) return true;
+    }
   };
+  // const navigate = useNavigate();
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+
+  //   // console.log({
+  //   //   email: data.get("email"),
+  //   //   password: data.get("password"),
+  //   // });
+  //   let Users = JSON.parse(localStorage.getItem("Users"));
+  //   // console.log(Users);
+  //   let TrueUser = Users.filter((user) => {
+  //     return (
+  //       user.email == data.get("email") && user.password == data.get("password")
+  //     );
+  //   });
+  //   console.log(TrueUser.length > 0);
+  //   if (TrueUser.length > 0) {
+  //     navigate("/Home");
+  //   } else navigate("/SignIn");
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -74,17 +108,12 @@ export const SignIn = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id={"email"}
               label="Email Address"
               name="email"
               autoComplete="email"
@@ -97,7 +126,8 @@ export const SignIn = () => {
               name="password"
               label="Password"
               type="password"
-              id="password"
+              // id="password"
+              id={"password"}
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -105,9 +135,10 @@ export const SignIn = () => {
               label="Remember me"
             />
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
+              onClick={handelSubmit}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In

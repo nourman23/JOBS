@@ -6,14 +6,23 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useCookies } from "react-cookie";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
+const MySwal = withReactContent(Swal);
+
+const patterns = {
+  email: /(\w{4,}).?-?_?(\w{2,})?@([a-z\d]+).com/,
+  password: /^[\w]{8,20}$/,
+};
 function Copyright(props) {
   return (
     <Typography
@@ -33,34 +42,93 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-let Users = [];
+// let Users = [];
 export const SignUp = () => {
-  const [users, setusers] = useState([]);
-  function User(thname, themail, thpassword) {
-    let name = thname;
-    let email = themail.toLowerCase();
-    let password = thpassword;
+  const [cookies, setCookie] = useCookies(["currentUser"]);
+  const [allUsers, setAllusers] = useCookies([]);
 
-    return {
-      name: name,
-      email: email,
-      password: password,
-    };
-  }
+  const [allUsersArray, setAllusersArray] = useState([]);
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    let email = document.getElementById("email").value;
+    let name = document.getElementById("firstName").value;
+    let password = document.getElementById("password").value;
+    let ConfirmPassword = document.getElementById("ConfirmPassword").value;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    let user = new User(
-      data.get("firstName"),
-      data.get("email"),
-      data.get("password")
-    );
-    Users.push(user);
-
-    localStorage.setItem("Users", JSON.stringify(Users));
+    if (
+      patterns.email.test(email) &&
+      patterns.password.test(password) &&
+      password == ConfirmPassword
+    ) {
+      console.log("tets");
+      if (checkEmail(email)) {
+        let newUser = { name: name, email: email, password: password };
+        setAllusersArray([...allUsersArray, newUser]);
+        console.log(allUsersArray);
+        setCookie("currentUser", newUser, { path: "/" });
+        setAllusers("AllUsers", [...allUsersArray, newUser], { path: "/" });
+        navigate("/Home");
+      } else {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "This Email is already used",
+          denyButtonColor: "#8E05C2",
+        });
+      }
+    } else {
+      MySwal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid Password or Email pattern ",
+        denyButtonColor: "#8E05C2",
+      });
+    }
   };
 
+  function checkEmail(E) {
+    console.log("userrrrr");
+    let rightUser = allUsersArray?.filter((user) => {
+      if (user.email == E) return true;
+    });
+    // console.log(rightUser);
+    if (rightUser[0] == null) {
+      return true;
+    }
+
+    return false;
+  }
+  // const [cookies, setCookie] = useCookies(["user"]);
+  // const [users, setUsers] = useState([]);
+  // function User(thFname, thLname, themail, thpassword) {
+  //   let Fname = thFname;
+  //   let Lname = thLname;
+  //   let email = themail.toLowerCase();
+  //   let password = thpassword;
+
+  //   return {
+  //     firstName: Fname,
+  //     lastName: Lname,
+  //     email: email,
+  //     password: password,
+  //   };
+  // }
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // const data = new FormData(event.currentTarget);
+  //   let firstName = document.getElementById("firstName").value;
+  //   let lastName = document.getElementById("lastName").value;
+  //   let email = document.getElementById("email").value;
+  //   let password = document.getElementById("password").value;
+  //   let confPassword = document.getElementById("ConfirmPassword").value;
+  //   let user = new User(firstName, lastName, email, password);
+  //   setUsers([...users, user]);
+  //   setCookie("Users", JSON.stringify(users), { path: "/" });
+
+  //   // setCookie("Users", JSON.stringify(Users));
+  // };
+  // console.log(cookies);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -79,12 +147,7 @@ export const SignUp = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -128,10 +191,22 @@ export const SignUp = () => {
                   autoComplete="new-password"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="conPassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="ConfirmPassword"
+                  autoComplete="new-password"
+                />
+              </Grid>
             </Grid>
             <Button
-              type="submit"
+              type="button"
               fullWidth
+              onClick={handleSubmit}
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
