@@ -12,12 +12,14 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const pages = ["Home", "About", "Contact"];
-const settings = ["Profile", "Logout"];
+// const settings = ["Profile", "Logout"];
 
 export const Header = () => {
+  const [cookies, removeCookie] = useCookies(["currentUser"]);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,10 +37,13 @@ export const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handelLogout = () => {
+    removeCookie("currentUser");
+  };
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky" className="theHeader">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
@@ -109,6 +114,7 @@ export const Header = () => {
                 ))}
               </Menu>
             </Box>
+
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             <Typography
               variant="h5"
@@ -130,11 +136,7 @@ export const Header = () => {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
+                <Button key={page} sx={{ my: 2, display: "block" }}>
                   {/* here */}
                   <NavLink
                     to={page}
@@ -147,33 +149,58 @@ export const Header = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="N" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
+              {cookies.currentUser == "undefined" && (
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  <NavLink
+                    to="/SignIn"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Login
+                  </NavLink>
+                </Button>
+              )}
+              {cookies.currentUser != "undefined" && (
+                <>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar alt="N" src="/static/images/avatar/2.jpg" />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {/* {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
-              </Menu>
+                ))} */}
+
+                    <MenuItem>
+                      <NavLink
+                        onClick={handelLogout}
+                        textAlign="center"
+                        to="/SignIn"
+                        style={{ color: "grey", textDecoration: "none" }}
+                      >
+                        Logout
+                      </NavLink>
+                    </MenuItem>
+                  </Menu>{" "}
+                </>
+              )}
             </Box>
           </Toolbar>
         </Container>

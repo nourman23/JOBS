@@ -63,11 +63,14 @@ export const SignIn = () => {
     function checkUser() {
       console.log(allUsers);
       let user = allUsers.AllUsers.filter(
-        (user) => user.email == currentUser.email
+        (user) =>
+          user.email == currentUser.email &&
+          user.password == currentUser.password
       );
       if (user.length > 0) return true;
     }
   };
+
   // const navigate = useNavigate();
   // const handleSubmit = (event) => {
   //   event.preventDefault();

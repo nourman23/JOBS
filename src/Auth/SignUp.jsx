@@ -44,8 +44,8 @@ function Copyright(props) {
 const theme = createTheme();
 // let Users = [];
 export const SignUp = () => {
-  const [cookies, setCookie] = useCookies(["currentUser"]);
-  const [allUsers, setAllusers] = useCookies([]);
+  const [cookies, setCookie] = useCookies("currentUser");
+  const [allUsers, setAllusers] = useCookies("AllUsers");
 
   const [allUsersArray, setAllusersArray] = useState([]);
   const navigate = useNavigate();
@@ -60,13 +60,12 @@ export const SignUp = () => {
       patterns.password.test(password) &&
       password == ConfirmPassword
     ) {
-      console.log("tets");
       if (checkEmail(email)) {
         let newUser = { name: name, email: email, password: password };
         setAllusersArray([...allUsersArray, newUser]);
-        console.log(allUsersArray);
+
         setCookie("currentUser", newUser, { path: "/" });
-        setAllusers("AllUsers", [...allUsersArray, newUser], { path: "/" });
+        setAllusers("AllUsers", allUsersArray, { path: "/" });
         navigate("/Home");
       } else {
         MySwal.fire({
@@ -85,9 +84,8 @@ export const SignUp = () => {
       });
     }
   };
-
+  console.log(allUsersArray);
   function checkEmail(E) {
-    console.log("userrrrr");
     let rightUser = allUsersArray?.filter((user) => {
       if (user.email == E) return true;
     });

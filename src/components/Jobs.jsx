@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import Job from "./Job";
 import axios from "axios";
-import Box from "@mui/material/Box";
-import { Pagination, Typography } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+
+import { TheCarousel } from "./Carousel";
+
 import { Select, Option } from "@material-tailwind/react";
 let arr = [];
 export const Jobs = () => {
@@ -14,10 +16,15 @@ export const Jobs = () => {
   const [FilteredJobs, setFilteredJobs] = useState([]);
 
   // pagination
-  const [page, setPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [jobPerPage, setJobPerPage] = useState(10);
   const handleChange = (event, value) => {
-    setPage(value);
+    setCurrentPage(value);
+    Window.onScroll(0, 0);
   };
+  const lastJobIndex = currentPage * jobPerPage;
+  const firstJobIndex = lastJobIndex - jobPerPage;
+  const currentJobs = FilteredJobs.slice(firstJobIndex, lastJobIndex);
 
   useEffect(() => {
     const options = {
@@ -40,7 +47,6 @@ export const Jobs = () => {
   }, []);
 
   useEffect(() => {
-    console.log(arr);
     arr = jobs.filter((job) => {
       return job.name.toLowerCase().includes(search.toLowerCase().trim());
     });
@@ -81,16 +87,20 @@ export const Jobs = () => {
   // } else
   return (
     <>
-      <div className="flex w-100 justify-content-center my-3">
+      <TheCarousel />
+      <h3 id="search" className="text-center m-5">
+        Jobs
+      </h3>
+      <div className="flex w-100 justify-content-center my-5">
         <div className="form-floating w-50 ">
           <input
             type="search"
             className="form-control"
-            id="floatingInput"
+            id="searchInput"
             placeholder="name@example.com"
             onChange={(e) => setSearch(e.target.value)}
           />
-          <label htmlFor="floatingInput">Search for a job ..</label>
+          <label htmlFor="searchInput">Search for a job ..</label>
         </div>
       </div>
       <div className="d-flex flex-wrap justify-content-center my-5">
@@ -127,15 +137,23 @@ export const Jobs = () => {
         style={{ minHeight: "40vh" }}
       >
         {/* .filter((_, count) => count < 20) */}
-        {FilteredJobs ? (
-          FilteredJobs.filter((_, count) => count < 20).map((job, i) => {
-            if (job.redirectJobUrl) {
-              return <Job key={i} job={job} />;
-            }
+        {currentJobs ? (
+          currentJobs.map((job, i) => {
+            // if (job.redirectJobUrl) {
+            return <Job key={i} job={job} />;
+            // }
           })
         ) : (
           <h1 className="text-center"> Not Found</h1>
         )}
+      </div>
+      <div className="flex justify-content-center m-5 ">
+        <Pagination
+          count={Math.ceil(FilteredJobs.length / jobPerPage)}
+          color="primary"
+          page={currentPage}
+          onChange={handleChange}
+        />
       </div>
     </>
   );

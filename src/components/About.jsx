@@ -43,7 +43,7 @@ export const About = () => {
                     data-aos="zoom-in"
                     data-aos-delay={200}
                   >
-                    <i className="bx bx-cube-alt" />
+                    <ion-icon name="search-outline"></ion-icon>
                     <h4>Ullamco laboris nisi</h4>
                     <p>
                       Excepteur sint occaecat cupidatat non proident, sunt in
