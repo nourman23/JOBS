@@ -5,19 +5,23 @@ export const TheCarousel = () => {
   var items = [
     {
       imageUrl:
-        "https://images.pexels.com/photos/4050320/pexels-photo-4050320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       imageUrl:
-        "https://media.istockphoto.com/id/1279104620/photo/top-view-of-a-white-desktop-concept-job-search.jpg?s=612x612&w=0&k=20&c=Ow_kvA2wQ4rLlqX_oFHgpjLb1JMKyPQKLOPzbu6w6qw=",
+        "https://content.mycareersfuture.gov.sg/wp-content/uploads/2021/02/job-search-singapore-2000x1334-1.png",
     },
     {
       imageUrl:
-        "https://www.incimages.com/uploaded_files/image/1920x1080/getty_510482146_200010002000928055_393268.jpg",
+        "https://images.pexels.com/photos/4065876/pexels-photo-4065876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       imageUrl:
-        "http://www.jobs4na.com/wp-content/uploads/2022/10/jobsearch.jpeg",
+        "https://images.pexels.com/photos/5717499/pexels-photo-5717499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      imageUrl:
+        "https://www.betterteam.com/images/betterteam-job-posting-template-6000x4000-2020127.jpeg?crop=2:1,smart&width=1200&dpr=2",
     },
   ];
 
@@ -54,7 +58,10 @@ function Item(props) {
         className="w-100 h-50 flex flex-column justify-content-center align-items-center"
         style={{ position: "absolute", top: "35%" }}
       >
-        <h2>Search For Your Job Dream </h2>
+        <h1 className="" style={{ fontSize: "70px" }}>
+          <span style={{ color: "#1976d2" }}>J</span>OBS
+        </h1>
+        <h2 className="mb-5 ">Search For Your Job Dream </h2>
         <a href="#search" className="">
           <button
             className="btn text-white z-10 "

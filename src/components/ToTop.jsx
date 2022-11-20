@@ -23,6 +23,7 @@ export const ToTop = () => {
 
   return (
     <button
+      className="flex align-items-center justify-content-center"
       id="toTop"
       onClick={() => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -31,11 +32,12 @@ export const ToTop = () => {
         position: "fixed",
         // padding: "5px",
         fontSize: "30px",
+        width: "40px",
         bottom: "40px",
         zIndex: 99,
         right: "40px",
         backgroundColor: "#1976d2",
-        borderRadius: "45%",
+        borderRadius: "50%",
         color: "#fff",
         textAlign: "center",
       }}

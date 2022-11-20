@@ -155,8 +155,9 @@ export const Jobs = () => {
                     </div>
                     <a
                       href={job.redirectJobUrl}
-                      className="btn btn-dark text-light float-right"
+                      className="btn text-light float-right"
                       target="blank"
+                      style={{ backgroundColor: "#21130d" }}
                     >
                       Apply
                     </a>

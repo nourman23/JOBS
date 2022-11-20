@@ -20,7 +20,6 @@ export const Jobs = () => {
   const [jobPerPage, setJobPerPage] = useState(10);
   const handleChange = (event, value) => {
     setCurrentPage(value);
-    Window.onScroll(0, 0);
   };
   const lastJobIndex = currentPage * jobPerPage;
   const firstJobIndex = lastJobIndex - jobPerPage;
@@ -88,9 +87,7 @@ export const Jobs = () => {
   return (
     <>
       <TheCarousel />
-      <h3 id="search" className="text-center m-5">
-        Jobs
-      </h3>
+      <h3 id="search" className="text-center m-5"></h3>
       <div className="flex w-100 justify-content-center my-5">
         <div className="form-floating w-50 ">
           <input
@@ -104,7 +101,7 @@ export const Jobs = () => {
         </div>
       </div>
       <div className="d-flex flex-wrap justify-content-center my-5">
-        <div className="w-25 mx-2">
+        <div className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8">
           <Select
             label="Filter By Experience Level"
             onChange={(e) => handleSelectLevel(e)}
@@ -118,7 +115,7 @@ export const Jobs = () => {
             <Option value="Lead">Lead</Option>
           </Select>
         </div>
-        <div className="w-25 mx-2">
+        <div className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8">
           <Select
             label="Filter By Job Type"
             onChange={(e) => handleSelectType(e)}
@@ -131,6 +128,14 @@ export const Jobs = () => {
             <Option value="Contract">Freelance/Contract</Option>
           </Select>
         </div>
+      </div>
+      <div className="flex justify-content-center m-5 ">
+        <Pagination
+          count={Math.ceil(FilteredJobs.length / jobPerPage)}
+          color="primary"
+          page={currentPage}
+          onChange={handleChange}
+        />
       </div>
       <div
         className="d-flex flex-wrap justify-content-center"

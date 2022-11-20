@@ -71,31 +71,9 @@ export const SignIn = () => {
     }
   };
 
-  // const navigate = useNavigate();
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-
-  //   // console.log({
-  //   //   email: data.get("email"),
-  //   //   password: data.get("password"),
-  //   // });
-  //   let Users = JSON.parse(localStorage.getItem("Users"));
-  //   // console.log(Users);
-  //   let TrueUser = Users.filter((user) => {
-  //     return (
-  //       user.email == data.get("email") && user.password == data.get("password")
-  //     );
-  //   });
-  //   console.log(TrueUser.length > 0);
-  //   if (TrueUser.length > 0) {
-  //     navigate("/Home");
-  //   } else navigate("/SignIn");
-  // };
-
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ marginBottom: 8 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -105,7 +83,7 @@ export const SignIn = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#795548" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -155,7 +133,6 @@ export const SignIn = () => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

@@ -23,6 +23,7 @@ function App() {
       {/* <Jobs/> */}
       <JobsProvider>
         <Routes>
+          <Route exact path="/" element={<Jobs />}></Route>
           <Route exact path="/Home" element={<Jobs />}></Route>
           <Route exact path="/About" element={<About />}></Route>
           <Route exact path="/Contact" element={<Contact />}></Route>

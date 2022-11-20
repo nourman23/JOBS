@@ -101,7 +101,7 @@ export const Header = () => {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
+                    <Typography>
                       {/* here */}
                       <NavLink
                         to={page}
@@ -115,7 +115,6 @@ export const Header = () => {
               </Menu>
             </Box>
 
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
@@ -124,6 +123,7 @@ export const Header = () => {
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
+                justifyContent: "center",
                 flexGrow: 1,
                 fontFamily: "monospace",
                 fontWeight: 700,
@@ -132,7 +132,11 @@ export const Header = () => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <img
+                src="https://api.logo.com/api/v2/images?format=webp&logo=logo_8374f3d0-95c3-440d-935c-8f1b2bff2018&width=1000&primary=%23ffffff&secondary=%23ffffff&accent=%23ffffff&background=transparent&tertiary=%23ffffff&fit=contain&u=1668784486"
+                alt=""
+                className="w-25"
+              />
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
@@ -191,7 +195,6 @@ export const Header = () => {
                     <MenuItem>
                       <NavLink
                         onClick={handelLogout}
-                        textAlign="center"
                         to="/SignIn"
                         style={{ color: "grey", textDecoration: "none" }}
                       >

@@ -5,7 +5,7 @@ function Job(props) {
   //   console.log(props.job);
   return (
     <>
-      <div className="card w-2/5 m-2 shadow">
+      <div className="card w-2/5 m-2 shadow col-lg-5 col-md-8 col-sm-12">
         <div className="card-body">
           <p className="float-lg-end text-center flex ">
             {/* <ion-icon
@@ -41,8 +41,9 @@ function Job(props) {
           </div> */}
           <a
             href={job.redirectJobUrl}
-            className="btn btn-dark text-light float-right"
+            className="btn text-light float-right"
             target="blank"
+            style={{ backgroundColor: "#795548" }}
           >
             Apply
           </a>

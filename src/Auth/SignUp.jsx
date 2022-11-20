@@ -45,8 +45,8 @@ const theme = createTheme();
 // let Users = [];
 export const SignUp = () => {
   const [cookies, setCookie] = useCookies("currentUser");
-  const [allUsers, setAllusers] = useCookies("AllUsers");
-
+  const [allUsers, setAllusers] = useCookies(["AllUsers"]);
+  console.log(allUsers);
   const [allUsersArray, setAllusersArray] = useState([]);
   const navigate = useNavigate();
   const handleSubmit = () => {
@@ -84,7 +84,7 @@ export const SignUp = () => {
       });
     }
   };
-  console.log(allUsersArray);
+  // console.log(allUsersArray);
   function checkEmail(E) {
     let rightUser = allUsersArray?.filter((user) => {
       if (user.email == E) return true;
@@ -139,7 +139,7 @@ export const SignUp = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#795548" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -212,14 +212,13 @@ export const SignUp = () => {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/SignIn" variant="body2">
-                  Already have an account? Sign in
+                <Link to="/SignIn" variant="body3">
+                  {"Don't have an account? Sign in"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
