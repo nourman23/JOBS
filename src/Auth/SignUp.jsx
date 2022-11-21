@@ -18,7 +18,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
-
+let users = [];
 const patterns = {
   email: /(\w{4,}).?-?_?(\w{2,})?@([a-z\d]+).com/,
   password: /^[\w]{8,20}$/,
@@ -47,9 +47,10 @@ export const SignUp = () => {
   const [cookies, setCookie] = useCookies("currentUser");
   const [allUsers, setAllusers] = useCookies(["AllUsers"]);
   console.log(allUsers);
-  const [allUsersArray, setAllusersArray] = useState([]);
+  // const [allUsersArray, setAllusersArray] = useState([]);
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let email = document.getElementById("email").value;
     let name = document.getElementById("firstName").value;
     let password = document.getElementById("password").value;
@@ -62,10 +63,9 @@ export const SignUp = () => {
     ) {
       if (checkEmail(email)) {
         let newUser = { name: name, email: email, password: password };
-        setAllusersArray([...allUsersArray, newUser]);
-
+        users.push(newUser);
         setCookie("currentUser", newUser, { path: "/" });
-        setAllusers("AllUsers", allUsersArray, { path: "/" });
+        setAllusers("AllUsers", users, { path: "/" });
         navigate("/Home");
       } else {
         MySwal.fire({
@@ -84,9 +84,9 @@ export const SignUp = () => {
       });
     }
   };
-  // console.log(allUsersArray);
+  console.log(users);
   function checkEmail(E) {
-    let rightUser = allUsersArray?.filter((user) => {
+    let rightUser = users?.filter((user) => {
       if (user.email == E) return true;
     });
     // console.log(rightUser);

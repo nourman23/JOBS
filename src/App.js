@@ -31,7 +31,7 @@ function App() {
           <Route exact path="/SignUp" element={<SignUp />}></Route>
           <Route exact path="/SignIn" element={<SignIn />}></Route>
           <Route path="*" element={<NotFound />} />
-        </Routes>{" "}
+        </Routes>
       </JobsProvider>
       <Footer />
     </div>

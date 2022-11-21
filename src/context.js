@@ -17,7 +17,6 @@ const JobsProvider = (props) => {
       },
       // params: {query: 'Python developer in Texas, USA', num_pages: '1'},
     };
-
     axios
       .request(options)
       .then(function (response) {
@@ -29,6 +28,9 @@ const JobsProvider = (props) => {
       });
   }, []);
 
+  if (FilteredJobs.length == 0) {
+    return "loading jobs";
+  }
   return (
     <>
       <AppContext.Provider value={{ jobs, FilteredJobs, setFilteredJobs }}>

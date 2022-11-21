@@ -41,15 +41,18 @@ const theme = createTheme();
 
 export const SignIn = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["currentUser"]);
+  const [cookies, setCookie, removeCookie] = useCookies("currentUser");
   const [allUsers, setAllusers] = useCookies(["allUsers"]);
 
-  const handelSubmit = () => {
+  const handelSubmit = (e) => {
+    e.preventDefault();
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     const currentUser = { email: email, password: password };
-    if (checkUser()) {
-      setCookie("currentUser", currentUser, { path: "/" });
+    console.log(checkUser());
+    let us = checkUser();
+    if (us) {
+      setCookie("currentUser", us, { path: "/" });
       navigate("/Home");
     } else {
       MySwal.fire({
@@ -61,13 +64,13 @@ export const SignIn = () => {
     }
 
     function checkUser() {
-      console.log(allUsers);
+      // console.log(allUsers);
       let user = allUsers.AllUsers.filter(
         (user) =>
           user.email == currentUser.email &&
           user.password == currentUser.password
       );
-      if (user.length > 0) return true;
+      if (user.length > 0) return user;
     }
   };
 

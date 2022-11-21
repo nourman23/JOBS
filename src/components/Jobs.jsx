@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import Job from "./Job";
+import { About } from "./About";
 import axios from "axios";
 import Pagination from "@mui/material/Pagination";
+import { Container } from "@mui/system";
 
 import { TheCarousel } from "./Carousel";
 
@@ -87,78 +89,102 @@ export const Jobs = () => {
   return (
     <>
       <TheCarousel />
-      <h3 id="search" className="text-center m-5"></h3>
-      <div className="flex w-100 justify-content-center my-5">
-        <div className="form-floating w-50 ">
-          <input
-            type="search"
-            className="form-control"
-            id="searchInput"
-            placeholder="name@example.com"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <label htmlFor="searchInput">Search for a job ..</label>
-        </div>
-      </div>
-      <div className="d-flex flex-wrap justify-content-center my-5">
-        <div className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8">
-          <Select
-            label="Filter By Experience Level"
-            onChange={(e) => handleSelectLevel(e)}
-          >
-            <Option value="All" selected>
-              All
-            </Option>
-            <Option value="Junior">Junior</Option>
-            <Option value="Senior">Senior</Option>
-            <Option value="Regular">Regular</Option>
-            <Option value="Lead">Lead</Option>
-          </Select>
-        </div>
-        <div className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8">
-          <Select
-            label="Filter By Job Type"
-            onChange={(e) => handleSelectType(e)}
-          >
-            <Option value="All" selected>
-              All
-            </Option>
-            <Option value="Full-Time">Full-Time</Option>
-            <Option value="Part-Time">Part-Time</Option>
-            <Option value="Contract">Freelance/Contract</Option>
-          </Select>
-        </div>
-      </div>
-      <div className="flex justify-content-center m-5 ">
-        <Pagination
-          count={Math.ceil(FilteredJobs.length / jobPerPage)}
-          color="primary"
-          page={currentPage}
-          onChange={handleChange}
-        />
-      </div>
       <div
-        className="d-flex flex-wrap justify-content-center"
-        style={{ minHeight: "40vh" }}
+      // style={{
+      //   backgroundImage:
+      //     'url("https://images.pexels.com/photos/12957596/pexels-photo-12957596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+      //   backgroundSize: "cover",
+      // }}
       >
-        {/* .filter((_, count) => count < 20) */}
-        {currentJobs ? (
-          currentJobs.map((job, i) => {
-            // if (job.redirectJobUrl) {
-            return <Job key={i} job={job} />;
-            // }
-          })
-        ) : (
-          <h1 className="text-center"> Not Found</h1>
-        )}
-      </div>
-      <div className="flex justify-content-center m-5 ">
-        <Pagination
-          count={Math.ceil(FilteredJobs.length / jobPerPage)}
-          color="primary"
-          page={currentPage}
-          onChange={handleChange}
-        />
+        <h3 className="text-center pt-5">About Us</h3>
+
+        <Container sx={{ width: "75%" }}>
+          <About />
+        </Container>
+
+        <Container>
+          <h3 id="search" className="text-center m-5">
+            Search Here
+          </h3>
+          <div className="flex justify-content-center my-5">
+            <div className="form-floating w-50 ">
+              <input
+                type="search"
+                className="form-control"
+                id="searchInput"
+                placeholder="name@example.com"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <label htmlFor="searchInput">Search for a job ..</label>
+            </div>
+          </div>
+          <div className="d-flex flex-wrap justify-content-center my-5">
+            <div
+              className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8"
+              style={{ backgroundColor: "white", borderRadius: "10px" }}
+            >
+              <Select
+                label="Filter By Experience Level"
+                onChange={(e) => handleSelectLevel(e)}
+              >
+                <Option value="All" selected>
+                  All
+                </Option>
+                <Option value="Junior">Junior</Option>
+                <Option value="Senior">Senior</Option>
+                <Option value="Regular">Regular</Option>
+                <Option value="Lead">Lead</Option>
+              </Select>
+            </div>
+            <div
+              className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8"
+              style={{ backgroundColor: "white", borderRadius: "10px" }}
+            >
+              <Select
+                label="Filter By Job Type"
+                onChange={(e) => handleSelectType(e)}
+              >
+                <Option value="All" selected>
+                  All
+                </Option>
+                <Option value="Full-Time">Full-Time</Option>
+                <Option value="Part-Time">Part-Time</Option>
+                <Option value="Contract">Freelance/Contract</Option>
+              </Select>
+            </div>
+          </div>
+          <div className="flex justify-content-center m-5 ">
+            <Pagination
+              count={Math.ceil(FilteredJobs.length / jobPerPage)}
+              color="primary"
+              page={currentPage}
+              onChange={handleChange}
+            />
+          </div>
+          <div
+            className="d-flex flex-wrap justify-content-center"
+            style={{ minHeight: "40vh" }}
+          >
+            {/* .filter((_, count) => count < 20) */}
+            {currentJobs ? (
+              currentJobs.map((job, i) => {
+                // if (job.redirectJobUrl) {
+                return <Job key={i} job={job} />;
+                // }
+              })
+            ) : (
+              <h1 className="text-center"> Not Found</h1>
+            )}
+          </div>
+          <div className="flex justify-content-center mt-5 pb-5 ">
+            <Pagination
+              count={Math.ceil(FilteredJobs.length / jobPerPage)}
+              color="primary"
+              page={currentPage}
+              onChange={handleChange}
+            />
+          </div>
+        </Container>
       </div>
     </>
   );

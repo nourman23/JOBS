@@ -37,7 +37,8 @@ export const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const handelLogout = () => {
+  const handelLogout = (e) => {
+    // e.preventDefault();
     removeCookie("currentUser");
   };
 
@@ -167,7 +168,22 @@ export const Header = () => {
                 <>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar alt="N" src="/static/images/avatar/2.jpg" />
+                      {/* <Avatar alt="N" src="/static/images/avatar/2.jpg" /> */}
+
+                      <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                        <svg
+                          className="absolute -left-1 w-12 h-12 text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
                     </IconButton>
                   </Tooltip>
                   <Menu
@@ -191,7 +207,14 @@ export const Header = () => {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))} */}
-
+                    <MenuItem>
+                      <NavLink
+                        to="/Profile"
+                        style={{ color: "grey", textDecoration: "none" }}
+                      >
+                        Profile
+                      </NavLink>
+                    </MenuItem>
                     <MenuItem>
                       <NavLink
                         onClick={handelLogout}
@@ -201,7 +224,7 @@ export const Header = () => {
                         Logout
                       </NavLink>
                     </MenuItem>
-                  </Menu>{" "}
+                  </Menu>
                 </>
               )}
             </Box>
