@@ -30,7 +30,6 @@ export const ToTop = () => {
       }}
       style={{
         position: "fixed",
-        // padding: "5px",
         fontSize: "30px",
         width: "40px",
         bottom: "40px",
