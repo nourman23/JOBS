@@ -14,7 +14,7 @@ This project took me around four days to build, styling part took most time beca
 - Markdown to JSX :- For converting received Markdown response into HTML.
 - Material-UI , Tailwind & React Bootstrap:- For styling the UI & UX.
 - react cookies:- save login & signup information in coockies.
-- react google login:- For login by google.
+- react google login:- For login by google using google API.
 
 ### Resources
 
@@ -25,3 +25,4 @@ This project took me around four days to build, styling part took most time beca
 - [Bootstrap Docs](https://tailwindcss.com/docs/installation)
 - [react google login](https://www.npmjs.com/package/react-google-login)
 - [react cookie](https://www.npmjs.com/package/react-cookies)
+- [Api Url](https://devitjobs.us/api/jobsLight)

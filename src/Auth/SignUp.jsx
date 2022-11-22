@@ -16,6 +16,7 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Logingoogle } from "./Logingoogle";
 
 const MySwal = withReactContent(Swal);
 let users = [];
@@ -96,37 +97,7 @@ export const SignUp = () => {
 
     return false;
   }
-  // const [cookies, setCookie] = useCookies(["user"]);
-  // const [users, setUsers] = useState([]);
-  // function User(thFname, thLname, themail, thpassword) {
-  //   let Fname = thFname;
-  //   let Lname = thLname;
-  //   let email = themail.toLowerCase();
-  //   let password = thpassword;
 
-  //   return {
-  //     firstName: Fname,
-  //     lastName: Lname,
-  //     email: email,
-  //     password: password,
-  //   };
-  // }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // const data = new FormData(event.currentTarget);
-  //   let firstName = document.getElementById("firstName").value;
-  //   let lastName = document.getElementById("lastName").value;
-  //   let email = document.getElementById("email").value;
-  //   let password = document.getElementById("password").value;
-  //   let confPassword = document.getElementById("ConfirmPassword").value;
-  //   let user = new User(firstName, lastName, email, password);
-  //   setUsers([...users, user]);
-  //   setCookie("Users", JSON.stringify(users), { path: "/" });
-
-  //   // setCookie("Users", JSON.stringify(Users));
-  // };
-  // console.log(cookies);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -210,6 +181,9 @@ export const SignUp = () => {
             >
               Sign Up
             </Button>
+            <Grid sx={{ display: "flex", justifyContent: "center" }}>
+              <Logingoogle />
+            </Grid>
             <Grid container>
               <Grid item>
                 <Link to="/SignIn" variant="body3">

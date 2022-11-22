@@ -37,7 +37,7 @@ function Job(props) {
 
     let newJob = { email: cookies?.currentUser?.email, jobId: jobId };
     console.log(newJob.email);
-    if (cookies?.currentUser == "undefined") {
+    if (cookies?.currentUser == "undefined" || cookies?.currentUser == null) {
       navigate("/SignIn");
     } else {
       //for save job
@@ -68,66 +68,40 @@ function Job(props) {
   }
   // console.log(savedJobsCookies);
   return (
-    <>
-      <div className="card w-2/5 m-2 shadow col-lg-5 col-md-8 col-sm-12">
-        <div className="card-body">
-          <ion-icon
-            name="bookmark-outline"
-            class="theIcon"
-            id={job._id}
-            style={{ cursor: "pointer", fontSize: "25px" }}
-            onClick={() => handleSavedIcon2(job._id)}
-          ></ion-icon>
-          {/* <BookmarkIcon
-            id="save"
-            onClick={() => handleSavedIcon(job._id)}
-            // color="primary"
-            sx={{ color: "#ffa55b", display: "none", cursor: "pointer" }}
-          />
-          <BookmarkBorderIcon
-            id="unSave"
-            onClick={() => handleSavedIcon(job._id)}
-            
-          /> */}
-          <p className="float-lg-end text-center flex ">
-            {job.activeFrom.split("T")[0]} <br /> {job.jobType}
-          </p>
-          <img
-            src={"https://static.devitjobs.us/logo-images/" + job.logoImg}
-            width="20%"
-          />
-          <p className="card-title ">
-            <b> {job.company}</b> <br />( {job.name} ) - {job.expLevel}
-          </p>
-          <small>
-            <i
-              className="fa-solid fa-location-dot"
-              style={{ color: "grey" }}
-            ></i>{" "}
-            {job.address}
-          </small>
-          <br />
-          {/* <div className="w-75">
-            Technologies :
-            {job.technologies.map((technology, i) => {
-              return (
-                <span className="btn" key={i}>
-                  {technology}
-                </span>
-              );
-            })}
-          </div> */}
-          <a
-            href={job.redirectJobUrl}
-            className="btn text-light float-right"
-            target="blank"
-            style={{ backgroundColor: "#795548" }}
-          >
-            Apply
-          </a>
-        </div>
+    <div className="card m-2 shadow col-lg-5 col-md-5 col-sm-12 col-12">
+      <div className="card-body">
+        <ion-icon
+          name="bookmark-outline"
+          class="theIcon"
+          id={job._id}
+          style={{ cursor: "pointer", fontSize: "25px" }}
+          onClick={() => handleSavedIcon2(job._id)}
+        ></ion-icon>
+        <p className="float-lg-end text-center flex ">
+          {job.activeFrom.split("T")[0]} <br /> {job.jobType}
+        </p>
+        <img
+          src={"https://static.devitjobs.us/logo-images/" + job.logoImg}
+          width="20%"
+        />
+        <p className="card-title w-100">
+          <b> {job.company}</b> <br />( {job.name} ) - {job.expLevel}
+        </p>
+        <small>
+          <i className="fa-solid fa-location-dot" style={{ color: "grey" }}></i>{" "}
+          {job.address}
+        </small>
+        <br />
+        <a
+          href={job.redirectJobUrl}
+          className="btn text-light float-right"
+          target="blank"
+          style={{ backgroundColor: "#795548" }}
+        >
+          Apply
+        </a>
       </div>
-    </>
+    </div>
   );
 }
 export default Job;

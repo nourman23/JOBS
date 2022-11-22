@@ -118,9 +118,9 @@ export const Jobs = () => {
               <label htmlFor="searchInput">Search for a job ..</label>
             </div>
           </div>
-          <div className="d-flex flex-wrap justify-content-center my-5">
+          <div className="d-flex flex-wrap justify-content-center my-5 ">
             <div
-              className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8"
+              className="w-lg-25 mx-2 col-lg-4 col-md-6 col-sm-6 mt-3"
               style={{ backgroundColor: "white", borderRadius: "10px" }}
             >
               <Select
@@ -137,7 +137,7 @@ export const Jobs = () => {
               </Select>
             </div>
             <div
-              className="w-25 mx-2 col-lg-4 col-md-6 col-sm-8"
+              className="w-lg-25 mx-2 col-lg-4 col-md-6 col-sm-6 mt-3"
               style={{ backgroundColor: "white", borderRadius: "10px" }}
             >
               <Select
@@ -162,7 +162,7 @@ export const Jobs = () => {
             />
           </div>
           <div
-            className="d-flex flex-wrap justify-content-center"
+            className=" d-flex flex-wrap justify-content-center"
             style={{ minHeight: "40vh" }}
           >
             {/* .filter((_, count) => count < 20) */}

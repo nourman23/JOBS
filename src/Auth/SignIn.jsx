@@ -128,7 +128,9 @@ export const SignIn = () => {
             >
               Sign In
             </Button>
-            <Logingoogle />
+            <Grid sx={{ display: "flex", justifyContent: "center" }}>
+              <Logingoogle />
+            </Grid>
             <Grid container>
               <Grid item>
                 <Link href="/SignUp" variant="body2">
