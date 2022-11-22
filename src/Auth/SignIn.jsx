@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Logingoogle } from "./Logingoogle";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -127,6 +128,7 @@ export const SignIn = () => {
             >
               Sign In
             </Button>
+            <Logingoogle />
             <Grid container>
               <Grid item>
                 <Link href="/SignUp" variant="body2">
