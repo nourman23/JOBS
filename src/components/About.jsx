@@ -42,10 +42,10 @@ export const About = () => {
                       style={{ color: "#1976d2" }}
                     ></i>
                     <h4>Search for a job</h4>
-                    <p>
+                    {/* <p>
                       Consequuntur sunt aut quasi enim aliquam quae harum
                       pariatur laboris nisi ut aliquip
-                    </p>
+                    </p> */}
                   </div>
                   <div
                     className="col-md-6 icon-box"
@@ -57,10 +57,10 @@ export const About = () => {
                       style={{ color: "#1976d2" }}
                     ></i>
                     <h4>Apply for the job is suitable for you</h4>
-                    <p>
+                    {/* <p>
                       Expedita veritatis consequuntur nihil tempore laudantium
                       vitae denat pacta
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>

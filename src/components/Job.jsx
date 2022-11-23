@@ -84,7 +84,7 @@ function Job(props) {
           src={"https://static.devitjobs.us/logo-images/" + job.logoImg}
           width="20%"
         />
-        <p className="card-title w-100">
+        <p className="card-title">
           <b> {job.company}</b> <br />( {job.name} ) - {job.expLevel}
         </p>
         <small>
@@ -98,7 +98,7 @@ function Job(props) {
           target="blank"
           style={{ backgroundColor: "#795548" }}
         >
-          Apply
+          More info
         </a>
       </div>
     </div>

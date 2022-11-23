@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 
 const clientId =
   "638453071832-ili8lrmlocuu963brufjsjkhka8023b0.apps.googleusercontent.com";
-export const Logingoogle = () => {
+export const Logingoogle = (props) => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["currentUser"]);
 
@@ -42,7 +42,7 @@ export const Logingoogle = () => {
     <div>
       <GoogleLogin
         clientId={clientId}
-        buttonText="Or by Google"
+        buttonText={props.text}
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={"single_host_origin"}

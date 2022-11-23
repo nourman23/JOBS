@@ -129,7 +129,7 @@ export const SignIn = () => {
               Sign In
             </Button>
             <Grid sx={{ display: "flex", justifyContent: "center" }}>
-              <Logingoogle />
+              <Logingoogle text="Log in with Google"/>
             </Grid>
             <Grid container>
               <Grid item>

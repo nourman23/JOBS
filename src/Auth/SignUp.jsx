@@ -182,7 +182,7 @@ export const SignUp = () => {
               Sign Up
             </Button>
             <Grid sx={{ display: "flex", justifyContent: "center" }}>
-              <Logingoogle />
+              <Logingoogle text="Sign up with Google" />
             </Grid>
             <Grid container>
               <Grid item>

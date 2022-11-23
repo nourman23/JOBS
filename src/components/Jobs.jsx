@@ -98,7 +98,7 @@ export const Jobs = () => {
       >
         <h3 className="text-center pt-5">About Us</h3>
 
-        <Container sx={{ width: "75%" }}>
+        <Container sx={{ width: "85%" }}>
           <About />
         </Container>
 
